@@ -16,23 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/hello', function () {
+//     return response('<b>Heya</b>', 200)
+//         ->header('Content-Type', 'text/plain');
+// });
+
+// Route::get('/posts/{id}', function ($id) {
+//     ddd($id);
+//     return response('Post ' . $id);
+// })->where('id', '[0-9]+');
+
+// Route::get('/search', function (Request $request) {
+//     return $request->name . ' ' . $request->city;
+// });
+
+
 //all listings
 Route::get('/', [ListingController::class, 'index']);
 
+// show Create Form
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+//store listing
+Route::post('/listings', [ListingController::class, 'store']);
+
 //single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
-
-
-Route::get('/hello', function () {
-    return response('<b>Heya</b>', 200)
-        ->header('Content-Type', 'text/plain');
-});
-
-Route::get('/posts/{id}', function ($id) {
-    ddd($id);
-    return response('Post ' . $id);
-})->where('id', '[0-9]+');
-
-Route::get('/search', function (Request $request) {
-    return $request->name . ' ' . $request->city;
-});
