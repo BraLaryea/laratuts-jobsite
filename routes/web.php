@@ -42,13 +42,16 @@ Route::get('/listings/create', [ListingController::class, 'create'])->middleware
 Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 //show edit form 
-Route::get('/listings/{listing}/edit', [ListingController::class , 'edit'])->middleware('auth');
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
 
 // update listing 
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
 
 // delete listing 
 Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
+
+// Manage Listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
 //single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
