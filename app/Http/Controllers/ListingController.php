@@ -31,7 +31,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
-    // shore listing
+    // store listing
     public function store(Request $request)
     {
         $formFeilds = $request->validate([
@@ -58,5 +58,35 @@ class ListingController extends Controller
     public function edit(Listing $listing)
     {
         return view('listings.edit', ['listing' => $listing]);
+    }
+
+    // update listing
+    public function update(Request $request, Listing $listing)
+    {
+        $formFeilds = $request->validate([
+            'title' => 'required',
+            'company' => ['required'],
+            'location' => 'required',
+            'email' => ['required', ' email'],
+            'tags' => 'required',
+            'website' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $formFeilds['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        $listing->update($formFeilds);
+
+        return back()->with('message', 'Listing updated successfully!');
+        // return view('listings.create');
+    }
+
+    // delete listing
+    public function destroy(Listing $listing){
+        $listing->delete();
+        return redirect('/')->with('message', 'Listing deleted successfully!');
+
     }
 }
