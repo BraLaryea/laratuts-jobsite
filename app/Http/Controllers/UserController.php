@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $formFeilds = $request->validate([
             'name' => ['required', 'min:3'],
-            'email' => ['required', ' email', Rule::unique('listings', 'company')],
+            'email' => ['required', ' email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed|min:6',
         ]);
 
@@ -64,6 +64,6 @@ class UserController extends Controller
             return redirect('/')->with('message', 'You are now logged in');
         }
 
-        return back()->withErrors(['email' =>'Invalid credentials'])->onlyInput('email');
+        return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
     }
 }
